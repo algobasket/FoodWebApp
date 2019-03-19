@@ -3,6 +3,11 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var QRCode = require('qrcode');
+
+QRCode.toDataURL('I am a pony!', function (err, url) {
+  console.log(url)
+});
 
 /*
   ------ Connecting CouchDB ---------
@@ -20,8 +25,9 @@ var orderRouter = require('./routes/order');
 var app = express();
 
 // view engine setup
+app.engine('ejs', require('ejs-locals'));
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
