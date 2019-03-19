@@ -3,11 +3,17 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var QRCode = require('qrcode');
+var QRCodeMaker  = require('qrcode');
 
-QRCode.toDataURL('I am a pony!', function (err, url) {
-  console.log(url)
-});
+var QRCodeReader = require('qrcode-reader');
+var qr = new QRCodeReader();
+
+const Instascan = require('instascan');
+
+// QRCode.toCanvas(canvas, 'sample text', function (error) {
+//   if (error) console.error(error)
+//   console.log('success!');
+// })
 
 /*
   ------ Connecting CouchDB ---------
