@@ -1,9 +1,5 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color:#ea5b31;
-}
-
-a {
-  color: #00B7FF;
+#preview{
+  width:300px;
+  border:10px solid #ddd;
+  border-radius: 20px;
 }
