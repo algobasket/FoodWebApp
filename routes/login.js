@@ -45,7 +45,7 @@ router.post('/backend/auth',function(req,res,next){
             req.session.backendUserRole   = row.role;
             req.session.backendUserStatus = row.status;
             req.session.isBackendUserLoggedIn = true;
-            res.redirect('/backend');
+            res.redirect('/backend'); 
           }else{
             alert = "Invalid User Please Try Again !";
           }
