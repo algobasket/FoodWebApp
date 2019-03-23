@@ -4,23 +4,12 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session')
-// var QRCodeMaker  = require('qrcode');
-// var QRCodeReader = require('qrcode-reader');
-// var qr = new QRCodeReader();
 
-//var Instascan = require('instascan');
+ //------ Connecting CouchDB ---------
+var nano = require('nano')('http://admin:password@localhost:5984');
+var db   = nano.db.use('food-ordering-app');
 
-// QRCode.toCanvas(canvas, 'sample text', function (error) {
-//   if (error) console.error(error)
-//   console.log('success!');
-// })
-
-/*
-  ------ Connecting CouchDB ---------
-*/
-var nano = require('nano')('http://localhost:5984');
-
-
+// ------ Router ------------
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var backendRouter = require('./routes/backend');
@@ -30,24 +19,21 @@ var orderRouter = require('./routes/order');
 
 var app = express();
 
-// view engine setup
+
+// ---------- Middlewares -----------------
 app.engine('ejs', require('ejs-locals'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
 app.use(logger('dev'));
 app.use(session({
   secret:"algobasket is cool",
   resave: false,
   saveUninitialized: false
 }));
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-
 app.use('/', indexRouter);
 app.use('/users',usersRouter);
 app.use('/backend',backendRouter);

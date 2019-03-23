@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET Admin page. */
 router.get('/', function(req, res, next) {
-  if(!req.session.admin){
+  if(req.session.isBackendUserLoggedIn == false){
     res.redirect('/login/backend');
   }else{
     res.render('backend/index', { title:'Admin Dashboard' });

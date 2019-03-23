@@ -1,12 +1,13 @@
 <% layout('layout') %>
 <center>
-<form method="post">
+<form method="post" action="/login/backend/auth">
 <img src="/images/burger.gif" width="300"/>
 <h4>Back Office Access</h4>
+<h5><%= alert %></h5>
 <table class="table-fluid">
    <tr>
      <td>Username</td>
-     <td><input type="text" name"username" /></td>
+     <td><input type="text" name="email" /></td>
    </tr>
    <tr>
      <td>Password</td>
