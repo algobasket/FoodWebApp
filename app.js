@@ -6,16 +6,26 @@ var logger       = require('morgan');
 var session      = require('express-session');
 var flash        = require('connect-flash');
 let date         = require('date-and-time');
+let async        = require('async');
 
 
  //------ Connecting CouchDB ---------
-var nano = require('nano')('http://admin:password@localhost:5984');
-var db   = nano.db.use('food-ordering-app');
 
-// ------ Router ------------
+var db    = require('./config');
+
+// ------ Required Models ------------------
+
+// var loginModel    = require('./models/loginModel');
+// var userModel     = require('./models/userModel');
+// var categoryModel = require('./models/categoryModel');
+// var paymentModel  = require('./models/paymentModel');
+// var orderModel    = require('./models/orderModel');
+// var crudModel     = require('./models/crudModel');
+
+// ------ Required Routers -----------------
 var indexRouter   = require('./routes/index');
 var usersRouter   = require('./routes/users');
-var backendRouter = require('./routes/backend');
+var backendRouter = require('./routes/backend/index');
 var paymentRouter = require('./routes/payment');
 var loginRouter   = require('./routes/login');
 var orderRouter   = require('./routes/order');

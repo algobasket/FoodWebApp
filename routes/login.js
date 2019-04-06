@@ -1,16 +1,13 @@
-var express = require('express');
-var router = express.Router();
-var nano = require('nano')('http://admin:password@localhost:5984');
-var db = nano.db.use('food-ordering-app');
+var express    = require('express');
+var router     = express.Router();
+var nano       = require('nano')('http://admin:password@localhost:5984');
+var db         = nano.db.use('food-ordering-app');
+var loginModel = require('../models/loginModel');
 
 
-
-/* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Customer Login' });
 });
-
-
 
 
 
@@ -50,36 +47,8 @@ router.get('/backend',function(req,res,next){
 
 router.post('/backend/auth',function(req,res,next){
 
-  if(req.body.email && req.body.password){
-    const q = {
-    selector: {
-         email: { "$eq": req.body.email },
-         password: { "$eq": req.body.password }
-      },
-       fields: [ "email", "password", "role", "status" ],
-       limit:1
-     };
-    db.find(q).then((body) => {
-
-       if(body.docs.length == 1){
-           body.docs.forEach((row) => {
-          if(row.email){
-            req.session.backendUserEmail  = row.email;
-            req.session.backendUserRole   = row.role;
-            req.session.backendUserStatus = row.status;
-            req.session.isBackendUserLoggedIn = true;
-            req.flash('alert',"Login Successful");
-            res.redirect('/backend');
-           }
-          });
-       }else{
-            req.flash('alert','<div class="alert alert-danger">Invalid Credentials</div>');
-            res.redirect('/login/backend');
-       }
-
-     });
-   };
-
+  return loginModel.loginUser(req,res,next);
+  
 });
 
 router.get('/logout', function(req, res, next) {

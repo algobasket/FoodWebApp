@@ -1,9 +1,10 @@
 let express = require('express')
- , router  = express.Router()
- , nano    = require('nano')('http://admin:password@localhost:5984')
- , db      = nano.db.use('food-ordering-app')
- , date    = require('date-and-time')
- , uuidv1 = require('uuid/v1');
+ , router   = express.Router()
+ , nano     = require('nano')('http://admin:password@localhost:5984')
+ , db       = nano.db.use('food-ordering-app')
+ , date     = require('date-and-time')
+ , uuidv1   = require('uuid/v1');
+
 
  /* -------- Backend Dashboard  ------- */
 router.get('/', function(req, res, next) {
@@ -18,7 +19,7 @@ router.get('/', function(req, res, next) {
  /* -----Backend Categories ------------ */
 router.get('/categories',function(req, res, next){
 
-     db.get('_design/all_categories/_view/categories',function(err,body){
+     db.get('_design/Category/_view/CategoryDoc',function(err,body){
        if(err){
          res.send(err);
        }
@@ -36,6 +37,7 @@ router.get('/categories',function(req, res, next){
    });
   //res.render('backend/categories',data);
 });
+
 /* -------- Backend Create Categories  ------- */
 router.post('/categories/create',function(req, res, next){
 
@@ -54,8 +56,10 @@ router.post('/categories/create',function(req, res, next){
     })
   };
 });
+
+
 router.get('/categories/edit/:id',function(req,res,next){
-  db.get('_design/all_categories/_view/categories',{ _id : req.params.id },function(err,body){
+  db.get('_design/all_categories/_view/categories',{ key : req.params.id },function(err,body){
     if(err){
       res.send(err);
     }
@@ -64,15 +68,38 @@ router.get('/categories/edit/:id',function(req,res,next){
       alert : req.flash('alert'),
       categories : body.rows
     };
-    //console.log(data.categories);
-    // data.forEach(function(x){
-    //   console.log(x);
-    // });
-
     res.render('backend/categories',data);
   });
 });
 
+
+router.post('/categories/edit/',function(req,res,next){
+
+  db.update = function(obj, key, callback) {
+    var db = this;
+    db.get(key, function (error, existing) {
+        if(!error) obj._rev = existing._rev;
+        db.insert(obj, key, callback);
+    });
+  }
+  var data = {
+    category_name : req.body.category_name,
+    description   : req.body.description,
+    updated : date.format(new Date(), 'DD-MM-YYYY'),
+    status : req.body.status
+  }
+  db.update(data,req.body.id, function(err, res) {
+    if (err) return console.log('No update!');
+    req.flash('alert','<br><div class="alert alert-success">Category Updated</div>');
+    res.redirect('/backend/categories');
+  });
+
+});
+
+
+router.delete('/categories/delete/:id',function(req,res,next){
+  db.delete('Category',{ key : req.params.id });
+});
 
 
 /* -------- Backend Products  ------- */
