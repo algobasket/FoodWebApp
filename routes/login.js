@@ -51,10 +51,13 @@ router.post('/backend/auth',function(req,res,next){
   
 });
 
+
 router.get('/logout', function(req, res, next) {
   req.session.destroy(function(err) {
     res.redirect('/login/backend');
   })
 });
+
+
 
 module.exports = router;
