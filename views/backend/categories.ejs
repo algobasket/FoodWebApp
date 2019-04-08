@@ -213,9 +213,9 @@
                                           <% i = 1;categories.forEach(function(category){ %>
                                             <tr>
                                                 <td><%= i %></td>
-                                                <td><%= category.value.category_name %></td>
-                                                <td><%= category.value.created %></td>
-                                                <td><%= category.value.status %></td>
+                                                <td><%= category.value.catName %></td>
+                                                <td><%= category.value.catCreated %></td>
+                                                <td><%= category.value.catStatus %></td>
                                                 <td class="text-right">
                                                   <a href="/backend/categories/edit/<%= category.id %>" >Edit</a>
                                                   <a href="#" onclick="$('.deleteCategoryPop').modal('show');$('.deleteCategoryBtn').attr('href',$(this).data('url'))" data-url="/backend/categories/delete/<%= category.id %>">Del</a>

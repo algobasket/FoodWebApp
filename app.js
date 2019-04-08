@@ -30,7 +30,13 @@ var loginRouter   = require('./routes/login');
 var orderRouter   = require('./routes/order');
 
 var backendRouter = require('./routes/backend/index');
-var backendCatRouter = require('./routes/backend/category');
+var backendCategoriesRouter = require('./routes/backend/categories');
+// var backendProductsRouter = require('./routes/backend/products');
+// var backendOrdersRouter = require('./routes/backend/orders');
+// var backendPaymentsRouter = require('./routes/backend/payments');
+// var backendUsersRouter = require('./routes/backend/users');
+// var backendSiteSettingsRouter = require('./routes/backend/siteSettings');
+// var backendApiSettingsRouter = require('./routes/backend/apiSettings');
 
 var app = express();
 
@@ -59,13 +65,13 @@ app.use('/login',loginRouter);
 app.use('/order',orderRouter);
 
 app.use('/backend',backendRouter); 
-app.use('/backend/categories',backendCategoriesRouter);
-app.use('/backend/products',backendProductsRouter);
-app.use('/backend/orders',backendOrdersRouter);
-app.use('/backend/payments',backendPaymentsRouter);
-app.use('/backend/users',backendUsersRouter);
-app.use('/backend/siteSettings',backendSiteSettingsRouter);
-app.use('/backend/apiSettings',backendApiSettingsRouter);
+app.use('/backendCategories',backendCategoriesRouter);
+// app.use('/backend/products',backendProductsRouter);
+// app.use('/backend/orders',backendOrdersRouter);
+// app.use('/backend/payments',backendPaymentsRouter);
+// app.use('/backend/users',backendUsersRouter);
+// app.use('/backend/siteSettings',backendSiteSettingsRouter);
+// app.use('/backend/apiSettings',backendApiSettingsRouter);
 
 
 // catch 404 and forward to error handler

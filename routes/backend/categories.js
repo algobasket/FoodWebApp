@@ -6,36 +6,29 @@ let express = require('express')
  , uuidv1   = require('uuid/v1');
 
 
- /* -------- Backend Dashboard  ------- */
-router.get('/', function(req, res, next) {
-  if(req.session.isBackendUserLoggedIn == false){
-    res.redirect('/login/backend');
-  }else{
-    res.render('backend/index', { title:'Admin Dashboard' });
-  }
-});
-
 
  /* -----Backend Categories ------------ */
-router.get('/categories',function(req, res, next){
+router.get('/backendCategories',function(req, res, next){
 
-     db.get('_design/Category/_view/CategoryDoc',function(err,body){
-       if(err){
-         res.send(err);
-       }
-       var data = {
-         section : 'list',
-         alert : req.flash('alert'),
-         categories : body.rows
-       };
-       //console.log(data.categories);
-       // data.forEach(function(x){
-       //   console.log(x);
-       // });
+   //   db.get('_design/CategoryDoc/_view/Category',function(err,body){
+   //     if(err){
+   //       res.send(err);
+   //     }
+   //     // var data = {
+   //     //   section : 'list',
+   //     //   alert : req.flash('alert'),
+   //     //   categories : body.rows
+   //     // };
+   //     var data = {};
+   //     console.log(body);
+   //     // data.forEach(function(x){
+   //     //   console.log(x);
+   //     // });
 
-       res.render('backend/categories',data);
-   });
+   //     //res.render('backend/categories',data);
+   // });
   //res.render('backend/categories',data);
+  res.send("ok");
 });
 
 /* -------- Backend Create Categories  ------- */
