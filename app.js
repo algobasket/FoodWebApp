@@ -25,10 +25,12 @@ var db    = require('./config');
 // ------ Required Routers -----------------
 var indexRouter   = require('./routes/index');
 var usersRouter   = require('./routes/users');
-var backendRouter = require('./routes/backend/index');
 var paymentRouter = require('./routes/payment');
 var loginRouter   = require('./routes/login');
 var orderRouter   = require('./routes/order');
+
+var backendRouter = require('./routes/backend/index');
+var backendCatRouter = require('./routes/backend/category');
 
 var app = express();
 
@@ -52,10 +54,18 @@ app.use(flash());
 
 app.use('/', indexRouter);
 app.use('/users',usersRouter);
-app.use('/backend',backendRouter);
 app.use('/payment',paymentRouter);
 app.use('/login',loginRouter);
 app.use('/order',orderRouter);
+
+app.use('/backend',backendRouter); 
+app.use('/backend/categories',backendCategoriesRouter);
+app.use('/backend/products',backendProductsRouter);
+app.use('/backend/orders',backendOrdersRouter);
+app.use('/backend/payments',backendPaymentsRouter);
+app.use('/backend/users',backendUsersRouter);
+app.use('/backend/siteSettings',backendSiteSettingsRouter);
+app.use('/backend/apiSettings',backendApiSettingsRouter);
 
 
 // catch 404 and forward to error handler
