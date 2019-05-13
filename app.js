@@ -24,14 +24,12 @@ var db    = require('./config');
 
 // ------ Required Routers -----------------
 var indexRouter   = require('./routes/index');
-var usersRouter   = require('./routes/users');
-var paymentRouter = require('./routes/payment');
 var loginRouter   = require('./routes/login');
-var orderRouter   = require('./routes/order');
 
-var backendRouter = require('./routes/backend/index');
+
+var backendRouter = require('./routes/backend/dashboard');
 var backendCategoriesRouter = require('./routes/backend/categories');
-// var backendProductsRouter = require('./routes/backend/products');
+var backendProductsRouter   = require('./routes/backend/products');
 // var backendOrdersRouter = require('./routes/backend/orders');
 // var backendPaymentsRouter = require('./routes/backend/payments');
 // var backendUsersRouter = require('./routes/backend/users');
@@ -59,14 +57,14 @@ app.use(flash());
 
 
 app.use('/', indexRouter);
-app.use('/users',usersRouter);
-app.use('/payment',paymentRouter);
+// app.use('/users',usersRouter);
+// app.use('/payment',paymentRouter);
 app.use('/login',loginRouter);
-app.use('/order',orderRouter);
+//app.use('/order',orderRouter);
 
 app.use('/backend',backendRouter); 
-app.use('/backendCategories',backendCategoriesRouter);
-// app.use('/backend/products',backendProductsRouter);
+app.use('/backend/categories',backendCategoriesRouter);
+app.use('/backend/products',backendProductsRouter);
 // app.use('/backend/orders',backendOrdersRouter);
 // app.use('/backend/payments',backendPaymentsRouter);
 // app.use('/backend/users',backendUsersRouter);

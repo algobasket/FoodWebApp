@@ -4,7 +4,7 @@ var db    = nano.db.use('food-ordering-app');
 
 // Get All User
 
-userModel.getAllUser = async (req, res, next) => {
+exports.getAllUser = async (req, res, next) => {
   try {
 
    var id = req.params.id ? req.params.id :0;
@@ -23,7 +23,7 @@ userModel.getAllUser = async (req, res, next) => {
 
 // Get Single User Info
 
-userModel.getOneUser = async (req, res, next) => {
+exports.getOneUser = async (req, res, next) => {
   try {
 
    var id = req.params.id ? req.params.id :0;
@@ -41,7 +41,7 @@ userModel.getOneUser = async (req, res, next) => {
 
 // Create User Account
 
-userModel.createUser = async (req, res, next) => {
+exports.createUser = async (req, res, next) => {
   try {
 
      var User = {
@@ -67,7 +67,7 @@ userModel.createUser = async (req, res, next) => {
 
 // Update User Info
 
-userModel.editUser = async (req, res, next) => {
+exports.editUser = async (req, res, next) => {
    try{
       db.update = function(obj, key, callback) {
     var db = this;
@@ -96,7 +96,7 @@ userModel.editUser = async (req, res, next) => {
 
 //Delete or Remove User Account
 
-userModel.deleteUser = async (req, res, next) => {
+exports.deleteUser = async (req, res, next) => {
   try {
 
    db.get(req.params.id).then((body) => {
@@ -109,7 +109,3 @@ userModel.deleteUser = async (req, res, next) => {
     return next(error)
   }
 }
-
-
-
-module.exports = userModel;

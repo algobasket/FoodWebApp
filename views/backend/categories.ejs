@@ -210,7 +210,13 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                          <% i = 1;categories.forEach(function(category){ %>
+                                          <% if(categories == 0){ %>
+                                          <tr>
+                                             <td colspan="5">No Data</td>
+                                          </tr>
+                                          <% }else{ %>
+
+                                             <% i = 1;categories.forEach(function(category){ %>
                                             <tr>
                                                 <td><%= i %></td>
                                                 <td><%= category.value.catName %></td>
@@ -218,10 +224,13 @@
                                                 <td><%= category.value.catStatus %></td>
                                                 <td class="text-right">
                                                   <a href="/backend/categories/edit/<%= category.id %>" >Edit</a>
-                                                  <a href="#" onclick="$('.deleteCategoryPop').modal('show');$('.deleteCategoryBtn').attr('href',$(this).data('url'))" data-url="/backend/categories/delete/<%= category.id %>">Del</a>
+                                                  <a href="#" onclick="$('.deleteCategoryPop').modal('show');$('.deleteCategoryBtn').attr('href',$(this).data('url'))" data-url="/backend/categories/delete/<%= category._rev %>">Del</a>
                                                 </td>
                                             </tr>
                                            <% i++;}) %>
+
+                                          <% } %>
+                                         
                                         </tbody>
                                     </table>
                                 </div>
@@ -251,19 +260,19 @@
                                             <% categories.forEach(function(category){ %>
                                               <thead>
                                                   <tr>
-                                                      <th colspan="2">Edit - <%= category.value.category_name %></th>
+                                                      <th colspan="2">Edit - <%= category.value.catName %></th>
                                                   </tr>
                                               </thead>
                                                 <tbody>
                                               <tr>
                                                   <td>Name</td>
                                                   <td>
-                                                  <input type="text" value="<%= category.value.category_name %>" name="category_name" class="form-control" placeholder="Enter Category Name" required/></td>
+                                                  <input type="text" value="<%= category.value.catName %>" name="category_name" class="form-control" placeholder="Enter Category Name" required/></td>
                                               </tr>
                                               <tr>
                                                   <td>Description</td>
                                                   <td>
-                                                   <textarea value="<%= category.value.description %>" name="description" class="form-control" placeholder="Enter Description" required></textarea>
+                                                   <textarea value="<%= category.value.catDescription %>" name="description" class="form-control" placeholder="Enter Description" required></textarea>
                                                   </td>
                                               </tr>
                                               <tr>
